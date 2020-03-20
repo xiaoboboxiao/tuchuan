@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>縮狗圖床 | 免費圖床_微博圖床_阿裏圖床_淘寶圖床 - 免費CDN圖床 - 圖床API</title>
+<meta name="description" content="缩狗图床永久免费图床，支出图床API合作，支持批量上传，即时预览，不限制流量，不限制外链数，永久保存，微博图片服务器，全网CDN图床，高速稳定,支持网页、手机上传，无需插件。支持JPG, GIF, PNG等文件格式。微博图床，围脖是个好图床。">
+<meta name="keywords" content="缩狗图床,图床API,图床,免费图床,微博图床,淘宝免费图床,淘宝图床,围脖是个好图床,围脖图床,网络图片,图片库,相册,网络相册">
+<link rel="stylesheet" href="https://pic.suo.dog/css/bootstrap.min.css">
+<link href="https://pic.suo.dog/css/font-awesome.css" rel="stylesheet">
+<link href="https://pic.suo.dog/css/jumbotron-narrow.css" rel="stylesheet">
+<link href="https://pic.suo.dog/css/style.css" rel="stylesheet">
+<link href="https://pic.suo.dog/css/style.css" rel="stylesheet">
+<script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<style>
+body {
+    background: #FFFFFF url(https://ae01.alicdn.com/kf/H1f6db9ff7ae244f29700cf5395f87bbf4.jpg) repeat-x scroll 0 -50px;
+    overflow-y: scroll;
+}
+</style>
+</head>
+<body style="">
+	<div class="container">
+		<div class="header">
+			<h2><center><b>
+				縮狗圖床
+				<small class="text-muted hidden-xs">免費CDN圖床 不限流量 無限外鏈 永久免費</small></b></center>
+			</h2>
+		</div>
+		<div class="jumbotron">
+			<p class="lead">
+				可以直接拖拽圖片上傳~<br>支持批量上傳哦~
+			</p>
+     		
+			<div class="mselector">
+				<input type="file" accept="image/*" multiple="">
+				<button type="button" class="btn btn-lg btn-info">選擇本地圖片</button>
+				<div class="bodyer">
+					<label><input name="keke" checked="checked" type="radio" value="1688">阿裏圖床</label>
+					<label><input name="keke" type="radio" value="tieba">百度圖床</label>
+					<label><input name="keke" type="radio" value="360">360圖床</label>
+					<label><input name="keke" type="radio" value="taobao">淘寶圖床</label>
+					<label><input name="keke" type="radio" value="smms">SM.MS圖床</label>
+					<label><input name="keke" type="radio" value="sohu">搜狐圖床</label>
+					<label><input name="keke" type="radio" value="jd">京東圖床</label>
+				</div>
+			</div>
+			
+			
+			
+			<hr>
+			
+			<textarea id="url-res-txt" class="form-control" rows="5" placeholder="上傳後的圖片外鏈地址將顯示在此處，下方會同時顯示預覽圖。"></textarea>
+     		
+     		<!-- 圖片預覽 -->
+			<div class="preview">
+				<br><hr>
+			</div>
+		</div>
+		<div class="footer"><center><font color="#FFFFFF">
+			<p><b>Copyright&nbsp;©&nbsp;365t在線 <a href="http://www.365tol.top#" target="_blank">冀ICP備17015056號</a>&nbsp;本站不存儲且無權管理上傳的圖源，上傳後無法刪除。切勿上傳違反法規之圖源，否則後果自負！</b></p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1264531863'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1264531863%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></center></font>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			
+			$('.picurl > input').bind('focus mouseover', function() {
+				if (this.value) {
+					this.select()
+				}
+			});
+			$("input[type='file']").change(function(e) {
+				imagesUpload(this.files)
+			});
+			var obj = $('body');
+			obj.on('dragenter', function(e) {
+				e.stopPropagation();
+				e.preventDefault()
+			});
+			obj.on('dragover', function(e) {
+				e.stopPropagation();
+				e.preventDefault()
+			});
+			obj.on('drop', function(e) {
+				e.preventDefault();
+				imagesUpload(e.originalEvent.dataTransfer.files)
+			})
+		});
+		
+		/**
+	 	 * 普通圖片上傳
+		 */
+		var imagesUpload = function(files) {
+			a=$('input:radio:checked').val();
+			var flag = 0;
+			$('textarea').empty();
+			$(files).each(function(key, value) {
+				$('.mselector > button')[0].innerHTML = '上傳中';
+				
+				setTimeout(function() {
+					uurrll = 'https://pic.suo.dog/api/tc.php?type='+a+'&echo=imgurl'
+					image_form = new FormData();
+					image_form.append("file", value);
+				
+					$.ajax({
+						url: uurrll,
+						type: 'POST',
+						data: image_form,
+						contentType: false,
+						cache: false,
+						processData: false,
+						async: false,
+						success: function(data) {
+							flag++;
+							//var jsonData = JSON.stringify(data)
+							if (typeof(data) == 'string'){
+								imgurl = data
+							} else {
+								imgurl = data.imgurl
+							}
+							
+							//alert(data)
+							$('#url-res-txt').append(imgurl + '\n');
+							$('.mselector > button')[0].innerHTML = '成功 ' + flag + '/' + files.length;
+							
+							// 生成預覽圖
+							var apc = "<img src='" + imgurl + "' referrerpolicy=\"no-referrer\" /><p>&nbsp;</p>";							
+							$('.preview').css('display', 'block');
+							$(".preview>hr").before(apc)
+							
+							
+							if (flag == $("input[type='file']")[0].files.length) {
+								if (typeof imgurl != 'undefined') {
+									$('.mselector > button')[0].innerHTML = '上傳成功'
+								} else {
+									$('.mselector > button')[0].innerHTML = '上傳失敗';
+									$('#url-res-txt').append(data.error_msg + '\n');
+									alert(data.error_msg)
+								}
+							}
+							
+						},
+						error: function(XMLResponse){
+							alert("error:" + XMLResponse.responseText);
+						}
+					});
+					
+				}, 100);
+			})
+		};
+		
+	</script>
+
+</body></html>
